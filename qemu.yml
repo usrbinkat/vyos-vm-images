@@ -1,3 +1,4 @@
+#!/sur/bin/ansible-playbook
 ---
 - hosts: qemu
   gather_facts: false
@@ -10,6 +11,12 @@
     cloud_init: "false"
     cloud_init_ds_string: "{{ cloud_init_ds | default('NoCloud,ConfigDrive,None') }}"
     cloud_init_ds_list: "{{ cloud_init_ds_string.split(',') }}"
+    custom_packages: true
+    grub_console: 'serial'
+    pxe: false
+    guest_agent: 'qemu'
+    cloud_init: true
+    disk_size: '3'
   roles:
     - install-packages
     - load-modules
